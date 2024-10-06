@@ -7,21 +7,24 @@ import { Cliente } from './entities/cliente.entity';
 
 @Injectable()
 export class ClientesService {
-
   constructor(
     @InjectRepository(Cliente)
-    private clientesRepository: Repository<Cliente>
+    private clientesRepository: Repository<Cliente>,
   ) {}
 
   async create(createClienteDto: CreateClienteDto) {
     //validação dando errado
-    const emailCadastrado = await this.clientesRepository.findOneBy({email: createClienteDto.email})
-    if (emailCadastrado) throw new Error('Email já cadastrado')
+    const emailCadastrado = await this.clientesRepository.findOneBy({
+      email: createClienteDto.email,
+    });
+    if (emailCadastrado) throw new Error('Email já cadastrado');
 
-    const cpfCadastrado = await this.clientesRepository.findOneBy({cpf: createClienteDto.cpf})
-    if (cpfCadastrado) throw new Error('CPF já cadastrado')
-    
-    const cliente = this.clientesRepository.create(createClienteDto)
+    const cpfCadastrado = await this.clientesRepository.findOneBy({
+      cpf: createClienteDto.cpf,
+    });
+    if (cpfCadastrado) throw new Error('CPF já cadastrado');
+
+    const cliente = this.clientesRepository.create(createClienteDto);
     return this.clientesRepository.save(cliente);
   }
 

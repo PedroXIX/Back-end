@@ -6,7 +6,7 @@ import { config } from './ormconfig';
 import { ClientesModule } from './clientes/clientes.module';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(config),ClientesModule],
+  imports: [TypeOrmModule.forRoot(config), ClientesModule],
   controllers: [AppController],
   providers: [AppService],
 })
