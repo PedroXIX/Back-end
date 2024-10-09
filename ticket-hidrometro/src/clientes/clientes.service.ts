@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateClienteDto } from './dto/create-cliente.dto';
 import { UpdateClienteDto } from './dto/update-cliente.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -7,24 +7,21 @@ import { Cliente } from './entities/cliente.entity';
 
 @Injectable()
 export class ClientesService {
+
   constructor(
     @InjectRepository(Cliente)
-    private clientesRepository: Repository<Cliente>,
+    private clientesRepository: Repository<Cliente>
   ) {}
 
   async create(createClienteDto: CreateClienteDto) {
     //validação dando errado
-    const emailCadastrado = await this.clientesRepository.findOneBy({
-      email: createClienteDto.email,
-    });
-    if (emailCadastrado) throw new Error('Email já cadastrado');
+    const emailCadastrado = await this.clientesRepository.findOneBy({email: createClienteDto.email})
+    if (emailCadastrado) throw new Error('Email já cadastrado')
 
-    const cpfCadastrado = await this.clientesRepository.findOneBy({
-      cpf: createClienteDto.cpf,
-    });
-    if (cpfCadastrado) throw new Error('CPF já cadastrado');
-
-    const cliente = this.clientesRepository.create(createClienteDto);
+    const cpfCadastrado = await this.clientesRepository.findOneBy({cpf: createClienteDto.cpf})
+    if (cpfCadastrado) throw new Error('CPF já cadastrado')
+    
+    const cliente = this.clientesRepository.create(createClienteDto)
     return this.clientesRepository.save(cliente);
   }
 
@@ -33,14 +30,21 @@ export class ClientesService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} cliente`;
+    return this.clientesRepository.findOneBy({id})
   }
 
-  update(id: number, updateClienteDto: UpdateClienteDto) {
-    return `This action updates a #${id} cliente`;
+  async update(id: number, updateClienteDto: UpdateClienteDto) {
+    const cliente = await this.clientesRepository.findOneBy({id})
+    if(!cliente) throw new NotFoundException('Cliente não encontrado')
+
+    this.clientesRepository.merge(cliente, updateClienteDto)
+    return await this.clientesRepository.save(cliente)
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} cliente`;
+  async remove(id: number) {
+    const cliente = await this.clientesRepository.findOneBy({id})
+    if(!cliente) throw new NotFoundException('Cliente não encontrado')
+
+    return await this.clientesRepository.remove(cliente)
   }
 }
