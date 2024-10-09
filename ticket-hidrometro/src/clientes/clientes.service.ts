@@ -14,7 +14,6 @@ export class ClientesService {
   ) {}
 
   async create(createClienteDto: CreateClienteDto) {
-    //validação dando errado
     const emailCadastrado = await this.clientesRepository.findOneBy({email: createClienteDto.email})
     if (emailCadastrado) throw new Error('Email já cadastrado')
 
