@@ -3,12 +3,12 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 export class Funcionario {
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
   @Column()
-  nome: string;
+  nome!: string;
 
   @Column()
-  email: string;
+  email!: string;
 
 }
