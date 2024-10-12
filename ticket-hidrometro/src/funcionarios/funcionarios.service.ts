@@ -20,7 +20,6 @@ export class FuncionariosService {
     const funcionario = this.funcionariosRepository.create(createFuncionarioDto)
     return this.funcionariosRepository.save(funcionario);
   }
-
   findAll() {
     return this.funcionariosRepository.find();
   }

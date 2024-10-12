@@ -11,5 +11,4 @@ export class UpdateFuncionarioDto extends PartialType(CreateFuncionarioDto) {
     @IsOptional()
     @IsEmail()
     email?: string
-
 }

@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Ticket } from 'src/tickets/entities/ticket.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Funcionario {
@@ -11,4 +12,6 @@ export class Funcionario {
   @Column()
   email!: string;
 
+  @OneToMany(() => Ticket, ticket => ticket.funcionarioId)
+  ticket?: Ticket[];  
 }
