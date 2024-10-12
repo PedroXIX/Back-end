@@ -4,23 +4,23 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 export class Cliente {
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
   @Column()
-  cpf: number;
+  cpf!: number;
 
   @Column()
-  nome: string;
+  nome!: string;
 
   @Column()
-  email: string;
+  email!: string;
 
   @Column()
-  endereco: string;
+  endereco!: string;
 
   @Column()
-  senha: string;
+  senha!: string;  
 
   @OneToMany(() => Ticket, ticket => ticket.clienteId)
-  ticket: Ticket[]
+  ticket: Ticket[]; 
 }
