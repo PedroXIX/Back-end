@@ -13,6 +13,5 @@ export class Funcionario {
   email!: string;
 
   @OneToMany(() => Ticket, ticket => ticket.funcionarioId)
-  ticket?: Ticket[]
-
+  ticket?: Ticket[];  
 }

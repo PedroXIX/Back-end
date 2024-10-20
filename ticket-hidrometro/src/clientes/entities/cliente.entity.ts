@@ -15,43 +15,42 @@ export class Cliente {
    * Este campo é gerado automaticamente pelo banco de dados.
    */
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
   /**
    * CPF do cliente.
    * Deve ser um número que representa o Cadastro de Pessoa Física.
    */
   @Column()
-  cpf: number;
+  cpf!: number;
 
   /**
    * Nome do cliente.
    * Este campo deve conter o nome completo do cliente.
    */
   @Column()
-  nome: string;
+  nome!: string;
 
   /**
    * Endereço de e-mail do cliente.
    * Este campo deve ser único e válido, representando a comunicação com o cliente.
    */
   @Column()
-  email: string;
+  email!: string;
 
   /**
    * Endereço residencial do cliente.
    * Este campo deve conter a localização do cliente para fins de correspondência.
    */
   @Column()
-  endereco: string;
+  endereco!: string;
 
   /**
    * Senha do cliente.
    * Este campo deve ser armazenado de forma segura (por exemplo, utilizando hashing).
    */
   @Column()
-  senha: string;
-
+  senha!: string;  
   /**
    * Relacionamento um-para-muitos com a entidade Ticket.
    * Um cliente pode ter múltiplos tickets associados.
