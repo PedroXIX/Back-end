@@ -47,4 +47,6 @@ export class GerentesService {
 
     return await this.gerentesRepository.remove(gerente)
   }
+
+  
 }
