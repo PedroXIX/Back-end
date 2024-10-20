@@ -1,6 +1,6 @@
 import { Cliente } from "src/clientes/entities/cliente.entity";
 import { Funcionario } from "src/funcionarios/entities/funcionario.entity";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Ticket {
@@ -23,7 +23,7 @@ export class Ticket {
     funcionarioId: number;
 
     @ManyToOne(() => Cliente, cliente => cliente.ticket) //criando relacionamento 1:N
-    cliente: Cliente
+    cliente!: Cliente
 
     @ManyToOne(() => Funcionario, funcionario => funcionario.ticket) //criando relacionamento 1:N
     funcionario: Funcionario

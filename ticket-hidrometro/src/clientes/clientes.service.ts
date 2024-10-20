@@ -46,4 +46,14 @@ export class ClientesService {
 
     return await this.clientesRepository.remove(cliente)
   }
+
+  async findOneWithTickets(id: number): Promise<Cliente>{
+    const cliente = await this.clientesRepository.findOneBy({id})
+    if(!cliente) throw new NotFoundException('Cliente não encontrado')
+
+      return await this.clientesRepository.findOne({
+        where: { id },
+        relations: ['ticket'], // Isso carrega os tickets relacionados ao cliente
+      });
+  }
 }

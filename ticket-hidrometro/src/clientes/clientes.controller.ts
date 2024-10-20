@@ -10,6 +10,7 @@ import {
 import { ClientesService } from './clientes.service';
 import { CreateClienteDto } from './dto/create-cliente.dto';
 import { UpdateClienteDto } from './dto/update-cliente.dto';
+import { Cliente } from './entities/cliente.entity';
 
 @Controller('clientes')
 export class ClientesController {
@@ -38,5 +39,10 @@ export class ClientesController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.clientesService.remove(+id);
+  }
+
+  @Get(':id/tickets')
+  findOneWithTickets(@Param('id') id: string): Promise<Cliente> {
+    return this.clientesService.findOneWithTickets(+id);
   }
 }
