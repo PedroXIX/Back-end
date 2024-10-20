@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsStrongPassword } from 'class-validator';
 
 export class CreateGerenteDto {
   @IsNotEmpty({ message: 'Nome é obrigatório' })
@@ -11,5 +11,10 @@ export class CreateGerenteDto {
   cpf: number;
 
   @IsNotEmpty({ message: 'Senha é obrigatório' })
+
+  @IsStrongPassword(
+    { minLength: 8, minNumbers: 1, minLowercase: 1, minSymbols: 1 }, // configuração da senha forte (opcional)
+    { message: 'Senha fraca' },
+  )
   senha: string;
 }
