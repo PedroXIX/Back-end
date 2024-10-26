@@ -20,8 +20,14 @@ async function bootstrap() {
       transform: true, // Transforma os dados de entrada em classes DTO
       whitelist: true, // Remove propriedades não definidas nos DTOs
       forbidNonWhitelisted: true, // Gera erro se propriedades não permitidas forem recebidas
-    }),
+    })    
   );
+  app.enableCors({
+    origin: true,
+    methods: 'GET, HEAD, PUT, PATCH, POST, DELETE, OPTIONS',
+    credentials: true,
+    });
+
   await app.listen(3000);
 }
 bootstrap();
