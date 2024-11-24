@@ -5,6 +5,14 @@ import { IsBoolean, IsNumber, IsOptional, IsString } from 'class-validator';
 export class UpdateTicketDto extends PartialType(CreateTicketDto) {
     @IsOptional()
     @IsString()
+    titulo?: string
+    
+    @IsOptional()
+    @IsBoolean()
+    status?: boolean
+
+    @IsOptional()
+    @IsString()
     categoria?: string
     
     @IsOptional()
@@ -13,7 +21,7 @@ export class UpdateTicketDto extends PartialType(CreateTicketDto) {
     
     @IsOptional()
     @IsBoolean()
-    status?: boolean
+    prioridade?: number
 
     @IsOptional()
     @IsNumber()
