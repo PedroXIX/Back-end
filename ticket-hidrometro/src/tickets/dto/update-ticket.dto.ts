@@ -20,7 +20,7 @@ export class UpdateTicketDto extends PartialType(CreateTicketDto) {
     descricao?: string
     
     @IsOptional()
-    @IsBoolean()
+    @IsNumber()
     prioridade?: number
 
     @IsOptional()
